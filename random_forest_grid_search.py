@@ -8,17 +8,20 @@ import numpy as np
 import sys
 
 
-# Load Data -- It is going be the collection of alpha carbon distances in the different macrostates.
-traj_total = np.load('../../featurized_trajs_1ns/raw/raw_tot.npy')
-ncluster = 16
+# Load Data 
+traj_total = np.load('') # Load reduced trajectory
+
+# Low dimensional clustering 
+ncluster = # Insert number of macrostates
 kmeans = KMeans(n_clusters=ncluster, random_state=0).fit(traj_total)
 label = kmeans.labels_
-label = np.reshape(label, (11880, 1))
-dataset = np.load(str(sys.argv[1])+'_ttraj.npy')
-labeled_dataset = np.concatenate((dataset, label), axis=1)
-np.random.shuffle(labeled_dataset)
-data = labeled_dataset[:, 0:2]
-label = labeled_dataset[:, 2]
+
+# Data processing
+label = np.reshape(label, (len(traj_total), 1))
+labeled_dataset = np.concatenate((traj_total, label), axis=1)
+np.random.shuffle(labeled_dataset) # Shuffle data features
+data = labeled_dataset[:, 0:2] # Features (projected dimensions)
+label = labeled_dataset[:, 2] # Labes (macrostates)
 
 #Data split
 X_train, X_test, y_train, y_test = train_test_split(data, label, test_size=0.33, random_state=42)
