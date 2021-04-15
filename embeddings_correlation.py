@@ -1,5 +1,5 @@
 import numpy as np
-from sklearn.metrics.pairwise import euclidean_distances
+from sklearn.metrics import pairwise_distances
 import scipy
 from scipy import stats
 from scipy.spatial import distance
@@ -7,8 +7,8 @@ from scipy.spatial import distance
 def pc(low_dim_array, high_dim_array):
     # Calculate low dimension distance matrix
     # Pairwise distances
-    low_dim_pairdist = euclidean_distances(low_dim_array, low_dim_array)
-    high_dim_pairdist = euclidean_distances(high_dim_array, high_dim_array)
+    low_dim_pairdist = pairwise_distances(low_dim_array, low_dim_array, metric='manhattan')
+    high_dim_pairdist = pairwise_distances(high_dim_array, high_dim_array, metric='manhattan')
 
 
     # The pairwise matrix is symmetric, retain only the upper half
