@@ -39,11 +39,11 @@ def iterate_clusters(reduced_list, high_list):
 
         # Append matching cluster and number of similar points to final list
         best.append(top)
-        reduced_sim.append(a) 
+        reduced_sim.append(best_sim) 
     return reduced_sim, best
 
 
-def print_similarty_percentage(reduced_sim):
+def print_similarty_percentage(reduced_sim, n_points):
     tot = 0
     
     for y in reduced_sim:
@@ -51,5 +51,5 @@ def print_similarty_percentage(reduced_sim):
         tot += y
         print('The total number of similar points is (so far):' +str(tot))
     
-    tot =(tot/len(reduced))*100
+    tot =(tot/n_points)*100
     print('The total number of similar points is (so far):' +str(tot))
